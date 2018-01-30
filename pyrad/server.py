@@ -179,10 +179,14 @@ class Server(host.Host):
         :param pkt: packet to process
         :type  pkt: Packet class instance
         """
-        if pkt.source[0] not in self.hosts:
-            raise ServerPacketError('Received packet from unknown host')
 
-        pkt.secret = self.hosts[pkt.source[0]].secret
+        if ("ANY" in self.hosts):
+            pkt.secret = self.hosts["ANY"].secret
+        elif pkt.source[0] not in self.hosts:
+            raise ServerPacketError('Received packet from unknown host')
+        else:
+            pkt.secret = self.hosts[pkt.source[0]].secret
+
         if pkt.code != packet.AccessRequest:
             raise ServerPacketError(
                 'Received non-authentication packet on authentication port')
@@ -197,10 +201,14 @@ class Server(host.Host):
         :param pkt: packet to process
         :type  pkt: Packet class instance
         """
-        if pkt.source[0] not in self.hosts:
-            raise ServerPacketError('Received packet from unknown host')
 
-        pkt.secret = self.hosts[pkt.source[0]].secret
+        if "ANY" in self.hosts:
+            pkt.secret = self.hosts["ANY"].secret
+        elif pkt.source[0] not in self.hosts:
+            raise ServerPacketError('Received packet from unknown host')
+        else:
+            pkt.secret = self.hosts[pkt.source[0]].secret
+
         if pkt.code not in [packet.AccountingRequest,
                             packet.AccountingResponse]:
             raise ServerPacketError(
@@ -216,10 +224,14 @@ class Server(host.Host):
         :param pkt: packet to process
         :type  pkt: Packet class instance
         """
-        if pkt.source[0] not in self.hosts:
-            raise ServerPacketError('Received packet from unknown host')
 
-        pkt.secret = self.hosts[pkt.source[0]].secret
+        if "ANY" in self.hosts:
+            pkt.secret = self.hosts["ANY"].secret
+        elif pkt.source[0] not in self.hosts:
+            raise ServerPacketError('Received packet from unknown host')
+        else:
+            pkt.secret = self.hosts[pkt.source[0]].secret
+
         if pkt.code == packet.CoARequest:
             self.HandleCoaPacket(pkt)
         elif pkt.code == packet.DisconnectRequest:
