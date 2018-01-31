@@ -200,6 +200,12 @@ class Packet(dict):
         except KeyError:
             return False
 
+    def GetKey(self, key, default=None):
+        if self.__contains__(key):
+            return self.__getitem__(key)
+        else:
+            return default
+
     has_key = __contains__
 
     def __delitem__(self, key):

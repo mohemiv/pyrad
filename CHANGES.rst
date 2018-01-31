@@ -1,6 +1,8 @@
 Changelog
 =========
 
+* Add GetKey function to Packet class.
+
 * Add ANY option for the server module.
 
 2.1 - Feb 2, 2017
