@@ -201,6 +201,17 @@ class Packet(dict):
             return False
 
     def GetKey(self, key, default=None):
+        """Return the key or default value.
+
+        :param key:      attribute name or identification
+        :type key:       string, attribute code or (vendor code, attribute code)
+                         tuple
+        :param default:  default value
+        :type default:   any
+
+        :return: value
+        :rtype:  depends on type of attribute
+        """
         if self.__contains__(key):
             return self.__getitem__(key)
         else:
